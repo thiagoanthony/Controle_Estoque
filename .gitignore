@@ -1,0 +1,12 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.db
+chroma/
+
+# Node
+node_modules/
+dist/
+
+# Ambiente
+.env
