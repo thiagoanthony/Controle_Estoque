@@ -8,5 +8,12 @@ chroma/
 node_modules/
 dist/
 
+# Scripts temporários
+*.ps1
+frontend.ps1
+app_update.ps1
+chat_update.ps1
+rag_novo.ps1
+
 # Ambiente
 .env
