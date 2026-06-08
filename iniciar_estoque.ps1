@@ -1,48 +1,23 @@
-﻿$BASE = "C:\Users\Thiago\OneDrive\Documentos\controle_estoque"
+﻿$BASE = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-Write-Host ""
-Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "   EstoqueIA — Iniciando o projeto...      " -ForegroundColor Cyan
-Write-Host "============================================" -ForegroundColor Cyan
-Write-Host ""
+Write-Host "Iniciando EstoqueIA..." -ForegroundColor Cyan
 
-Write-Host "[1/4] Encerrando processos anteriores..." -ForegroundColor Yellow
 Stop-Process -Name python -Force -ErrorAction SilentlyContinue
-Stop-Process -Name ollama -Force -ErrorAction SilentlyContinue
 Stop-Process -Name node   -Force -ErrorAction SilentlyContinue
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 1
 
-Write-Host "[2/4] Iniciando Ollama..." -ForegroundColor Yellow
-Start-Process -FilePath "ollama" -ArgumentList "serve" -WindowStyle Hidden
+Write-Host "Iniciando Ollama..." -ForegroundColor Yellow
+Start-Process "ollama" -ArgumentList "serve" -WindowStyle Hidden
 Start-Sleep -Seconds 3
-Write-Host "      Ollama rodando em http://localhost:11434" -ForegroundColor Green
 
-Write-Host "[3/4] Iniciando Backend FastAPI..." -ForegroundColor Yellow
-Start-Process -FilePath "python" `
-    -ArgumentList "-m uvicorn main:app --port 8001" `
-    -WorkingDirectory "$BASE\backend" `
-    -PassThru -WindowStyle Normal
+Write-Host "Iniciando Backend..." -ForegroundColor Yellow
+Start-Process "python" -ArgumentList "-m uvicorn main:app --port 8001" -WorkingDirectory "$BASE\backend" -WindowStyle Normal
 Start-Sleep -Seconds 4
-Write-Host "      Backend rodando em http://localhost:8001" -ForegroundColor Green
 
-Write-Host "[4/4] Iniciando Frontend React..." -ForegroundColor Yellow
-Start-Process -FilePath "cmd" `
-    -ArgumentList "/k npm run dev" `
-    -WorkingDirectory "$BASE\frontend" `
-    -PassThru -WindowStyle Normal
+Write-Host "Iniciando Frontend..." -ForegroundColor Yellow
+Start-Process "cmd" -ArgumentList "/k npm run dev" -WorkingDirectory "$BASE\frontend" -WindowStyle Normal
 Start-Sleep -Seconds 4
-Write-Host "      Frontend rodando em http://localhost:5173" -ForegroundColor Green
 
-Start-Sleep -Seconds 2
 Start-Process "http://localhost:5173"
-
-Write-Host ""
-Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "   EstoqueIA rodando com sucesso!           " -ForegroundColor Cyan
-Write-Host "============================================" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "  Frontend : http://localhost:5173" -ForegroundColor White
-Write-Host "  Backend  : http://localhost:8001" -ForegroundColor White
-Write-Host "  API Docs : http://localhost:8001/docs" -ForegroundColor White
-Write-Host ""
+Write-Host "Pronto! http://localhost:5173" -ForegroundColor Green
 pause
