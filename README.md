@@ -60,3 +60,4 @@ Acesse: http://localhost:5173
 Inteligência Artificial · Ciência da Computação  
 Centro Universitário do Triângulo — UNITRI  
 Prof. Me. Jair de Oliveira Pereira Neto
+Alunos. Thiago Anthony, Emerson Cardoso
