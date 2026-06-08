@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+chromadb
+ollama
+pandas
+python-multipart
+pydantic
